@@ -3,7 +3,6 @@ package com.survey.springboot.pwa.app.springboot_survey_app.config;
 import com.survey.springboot.pwa.app.springboot_survey_app.security.filtersJwt.JwtAuthenticationFilter;
 import com.survey.springboot.pwa.app.springboot_survey_app.security.filtersJwt.JwtAuthorizationFilter;
 import com.survey.springboot.pwa.app.springboot_survey_app.security.jwt.JwtUtils;
-import com.survey.springboot.pwa.app.springboot_survey_app.services.userServices.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,9 +22,6 @@ public class SecurityConfig {
     @Autowired
     JwtUtils jwtUtils;
 
-    @Autowired
-    private LoginService userDetailsService;
-
     @Bean
     SecurityFilterChain filterChain(HttpSecurity httpSecurity, AuthenticationManager authenticationManager, JwtAuthorizationFilter jwtAuthorizationFilter)throws Exception {
         JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(jwtUtils);
@@ -37,7 +33,6 @@ public class SecurityConfig {
 //                .cors((cors) -> cors
 //                .configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> {
-                        auth.requestMatchers("/login").permitAll();
                         auth.anyRequest().authenticated();
                 })
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -51,9 +46,7 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-
     @Bean
-    AuthenticationManager authenticationManager(HttpSecurity httpSecurity, PasswordEncoder passwordEncoder) throws Exception{
         AuthenticationManagerBuilder authenticationManagerBuilder =
                 httpSecurity.getSharedObject(AuthenticationManagerBuilder.class);
         authenticationManagerBuilder

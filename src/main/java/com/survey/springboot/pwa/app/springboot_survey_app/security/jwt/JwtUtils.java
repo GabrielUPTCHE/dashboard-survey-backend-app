@@ -2,8 +2,6 @@ package com.survey.springboot.pwa.app.springboot_survey_app.security.jwt;
 
 //import edu.uptc.PizonAcevedo.domain.model.userModel.UserEntity;
 //import edu.uptc.PizonAcevedo.domain.repository.repositoryUser.CredentialRepository;
-import com.survey.springboot.pwa.app.springboot_survey_app.models.user.UserEntity;
-import com.survey.springboot.pwa.app.springboot_survey_app.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -24,7 +22,6 @@ import java.util.stream.Collectors;
 public class JwtUtils {
 
     @Autowired
-    UserRepository userRepository;
 
 
     @Value("${jwt.secret.key}")
@@ -33,12 +30,9 @@ public class JwtUtils {
     @Value("${jwt.time.expiration}")
     private String timeExpiration;
 
-    public String generateAccesToken (String email){
-        UserEntity userEntity = userRepository.findByEmail(email).get();
 
 
         return Jwts.builder()
-                .subject(email)
 //                .claim("id", userEntity.getId())
 //                .claim("name", userEntity.getName())
 //                .claim("lastName", userEntity.getLastName())
@@ -48,8 +42,6 @@ public class JwtUtils {
 //                .claim("roles", userEntity.getRoles().stream().map(role -> role.getName().name()).collect(Collectors.toList()))
                 .claim("id", 102)
                 .claim("name", "test")
-                .claim("role", userEntity.getRole().getName().name())
-                .claim("email", userEntity.getEmail())
 
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + Long.parseLong(timeExpiration)))
