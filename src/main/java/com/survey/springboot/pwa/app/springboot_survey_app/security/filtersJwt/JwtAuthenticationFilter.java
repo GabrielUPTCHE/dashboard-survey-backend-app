@@ -2,6 +2,8 @@ package com.survey.springboot.pwa.app.springboot_survey_app.security.filtersJwt;
 
 import com.survey.springboot.pwa.app.springboot_survey_app.models.user.CrendentialEntity;
 import com.survey.springboot.pwa.app.springboot_survey_app.models.user.UserEntity;
+import com.survey.springboot.pwa.app.springboot_survey_app.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import tools.jackson.databind.ObjectMapper;
 import com.survey.springboot.pwa.app.springboot_survey_app.security.jwt.JwtUtils;
 import jakarta.servlet.FilterChain;
@@ -25,8 +27,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     private JwtUtils jwtUtils;
 
-    public JwtAuthenticationFilter(JwtUtils jwtUtils) {
+
+    private UserRepository userRepository;
+
+    public JwtAuthenticationFilter(JwtUtils jwtUtils, UserRepository userRepository) {
         this.jwtUtils = jwtUtils;
+        this.userRepository=userRepository;
     }
 
     @Override
@@ -55,15 +61,17 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
 
         User user = (User) authResult.getPrincipal();
+        UserEntity userEntity = userRepository.findByEmail(user.getUsername()).orElseThrow(() -> new RuntimeException("User not found"));
         String token = jwtUtils.generateAccesToken(user.getUsername());
         Cookie cookie = new Cookie("token", token);
         cookie.setHttpOnly(true);
-        cookie.setSecure(true);
+        cookie.setSecure(false);
         cookie.setPath("/");
         cookie.setMaxAge(60 * 60);
         response.addCookie(cookie);
         Map<String, Object> httpResponse = new HashMap<>();
-        httpResponse.put("message", "Autenticación correcta");
+        httpResponse.put("message", "Autenticacion correcta");
+        httpResponse.put("id", userEntity.getNumberIdentification());
         httpResponse.put("email", user.getUsername());
         response.getWriter().write(new ObjectMapper().writeValueAsString(httpResponse));
         response.setStatus(200);

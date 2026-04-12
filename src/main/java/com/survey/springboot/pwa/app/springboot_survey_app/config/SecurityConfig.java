@@ -1,5 +1,6 @@
 package com.survey.springboot.pwa.app.springboot_survey_app.config;
 
+import com.survey.springboot.pwa.app.springboot_survey_app.repository.UserRepository;
 import com.survey.springboot.pwa.app.springboot_survey_app.security.filtersJwt.JwtAuthenticationFilter;
 import com.survey.springboot.pwa.app.springboot_survey_app.security.filtersJwt.JwtAuthorizationFilter;
 import com.survey.springboot.pwa.app.springboot_survey_app.security.jwt.JwtUtils;
@@ -26,9 +27,12 @@ public class SecurityConfig {
     @Autowired
     LoginService userDetailsService;
 
+    @Autowired
+    UserRepository userRepository;
+
     @Bean
     SecurityFilterChain filterChain(HttpSecurity httpSecurity, AuthenticationManager authenticationManager, JwtAuthorizationFilter jwtAuthorizationFilter)throws Exception {
-        JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(jwtUtils);
+        JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(jwtUtils, userRepository);
         jwtAuthenticationFilter.setAuthenticationManager(authenticationManager);
         jwtAuthenticationFilter.setFilterProcessesUrl("/login");
 
@@ -37,6 +41,7 @@ public class SecurityConfig {
 //                .cors((cors) -> cors
 //                .configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> {
+                    auth.requestMatchers("/login").permitAll();
                         auth.anyRequest().authenticated();
                 })
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
