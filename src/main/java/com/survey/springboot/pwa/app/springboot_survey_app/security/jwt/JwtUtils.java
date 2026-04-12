@@ -1,7 +1,5 @@
 package com.survey.springboot.pwa.app.springboot_survey_app.security.jwt;
 
-//import edu.uptc.PizonAcevedo.domain.model.userModel.UserEntity;
-//import edu.uptc.PizonAcevedo.domain.repository.repositoryUser.CredentialRepository;
 import com.survey.springboot.pwa.app.springboot_survey_app.models.user.UserEntity;
 import com.survey.springboot.pwa.app.springboot_survey_app.repository.UserRepository;
 import io.jsonwebtoken.Claims;
@@ -48,7 +46,6 @@ public class JwtUtils {
                 .claim("numero_identificacion", userEntity.getNumberIdentification())
                 .claim("role", userEntity.getRole().getName().name())
                 .claim("email", userEntity.getEmail())
-
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + Long.parseLong(timeExpiration)))
                 .signWith(getSignatureKey(), SignatureAlgorithm.HS256)
