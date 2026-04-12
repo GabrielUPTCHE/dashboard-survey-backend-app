@@ -42,9 +42,6 @@ public class UserService {
                     .build();
 
             user.setCredential(credential);
-            System.out.println("Usuario creado: " + user);
-            System.out.println("Credencial creada: " + credential.getPassword());
-            System.out.println("id user "+credential.getUser().getNumberIdentification());
             return userRepository.save(user);
 
         } catch (DataIntegrityViolationException e) {
@@ -53,7 +50,6 @@ public class UserService {
             if (message.contains("Detail:")) {
                 message = message.substring(message.indexOf("Detail:"));
             }
-
             throw new RuntimeException(message);
            // throw new RuntimeException("Error al crear el usuario: " + e.getMessage());
         }

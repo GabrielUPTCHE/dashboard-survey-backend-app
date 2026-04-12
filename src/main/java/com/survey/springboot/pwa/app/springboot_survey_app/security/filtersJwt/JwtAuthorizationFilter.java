@@ -25,9 +25,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String token = null;
-
-        // 🔥 1. Buscar en cookies
+       String token = null;
         if (request.getCookies() != null) {
             for (Cookie cookie : request.getCookies()) {
                 if ("token".equals(cookie.getName())) {
@@ -36,14 +34,12 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                 }
             }
         }
-//        String tokenHeader = request.getHeader("Authorization");
-//        if(tokenHeader != null && tokenHeader.startsWith("Bearer ")){
         if(token != null){
 //            String token = tokenHeader.substring(7);
-                String email = jwtUtils.getUserNameFromToken(token);
-                UserDetails userDetails = userDetailsService.loadUserByUsername(email);
-                UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(email, null, userDetails.getAuthorities());
-                SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+            String email = jwtUtils.getUserNameFromToken(token);
+            UserDetails userDetails = userDetailsService.loadUserByUsername(email);
+            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(email, null, userDetails.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 
         }
         filterChain.doFilter(request, response);

@@ -26,7 +26,6 @@ public class JwtUtils {
     @Autowired
     UserRepository userRepository;
 
-
     @Value("${jwt.secret.key}")
     private String secretKey;
 
@@ -46,8 +45,7 @@ public class JwtUtils {
 //                .claim( "pathImage", userEntity.getPathImage())
 //                .claim("userStatus", userEntity.isUserStatus())
 //                .claim("roles", userEntity.getRoles().stream().map(role -> role.getName().name()).collect(Collectors.toList()))
-                .claim("id", 102)
-                .claim("name", "test")
+                .claim("numero_identificacion", userEntity.getNumberIdentification())
                 .claim("role", userEntity.getRole().getName().name())
                 .claim("email", userEntity.getEmail())
 

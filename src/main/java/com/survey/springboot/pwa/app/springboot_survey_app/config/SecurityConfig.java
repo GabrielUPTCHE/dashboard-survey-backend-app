@@ -24,7 +24,7 @@ public class SecurityConfig {
     JwtUtils jwtUtils;
 
     @Autowired
-    private LoginService userDetailsService;
+    LoginService userDetailsService;
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity httpSecurity, AuthenticationManager authenticationManager, JwtAuthorizationFilter jwtAuthorizationFilter)throws Exception {
@@ -37,7 +37,6 @@ public class SecurityConfig {
 //                .cors((cors) -> cors
 //                .configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> {
-                        auth.requestMatchers("/login").permitAll();
                         auth.anyRequest().authenticated();
                 })
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -51,7 +50,6 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-
     @Bean
     AuthenticationManager authenticationManager(HttpSecurity httpSecurity, PasswordEncoder passwordEncoder) throws Exception{
         AuthenticationManagerBuilder authenticationManagerBuilder =
@@ -61,5 +59,4 @@ public class SecurityConfig {
                 .passwordEncoder(passwordEncoder);       // ✅ PasswordEncoder configurado
         return authenticationManagerBuilder.build();     // ✅ Sin .and()
     }
-
 }
