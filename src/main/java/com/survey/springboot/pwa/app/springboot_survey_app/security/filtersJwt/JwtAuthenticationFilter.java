@@ -56,20 +56,15 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         User user = (User) authResult.getPrincipal();
         String token = jwtUtils.generateAccesToken(user.getUsername());
-        // 🔥 Crear cookie
         Cookie cookie = new Cookie("token", token);
-        cookie.setHttpOnly(true);      // 🔒 No accesible desde JS (seguridad)
-        cookie.setSecure(true);        // 🔒 Solo HTTPS (en producción)
-        cookie.setPath("/");           // Disponible en toda la app
-        cookie.setMaxAge(60 * 60);     // 1 hora
-
+        cookie.setHttpOnly(true);
+        cookie.setSecure(true);
+        cookie.setPath("/");
+        cookie.setMaxAge(60 * 60);
         response.addCookie(cookie);
-
-        // (Opcional) Respuesta limpia sin token
         Map<String, Object> httpResponse = new HashMap<>();
         httpResponse.put("message", "Autenticación correcta");
-        httpResponse.put("username", user.getUsername());
-
+        httpResponse.put("email", user.getUsername());
         response.getWriter().write(new ObjectMapper().writeValueAsString(httpResponse));
         response.setStatus(200);
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
