@@ -1,4 +1,4 @@
-package com.survey.springboot.pwa.app.springboot_survey_app.models.user;
+package com.survey.springboot.pwa.app.springboot_survey_app.persistence.models.user;
 
 import jakarta.persistence.*;
 import lombok.*;

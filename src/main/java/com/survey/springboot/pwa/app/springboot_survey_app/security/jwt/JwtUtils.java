@@ -1,7 +1,8 @@
 package com.survey.springboot.pwa.app.springboot_survey_app.security.jwt;
 
-import com.survey.springboot.pwa.app.springboot_survey_app.models.user.UserEntity;
-import com.survey.springboot.pwa.app.springboot_survey_app.repository.UserRepository;
+import com.survey.springboot.pwa.app.springboot_survey_app.persistence.models.user.UserEntity;
+import com.survey.springboot.pwa.app.springboot_survey_app.persistence.repository.UserRepository;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

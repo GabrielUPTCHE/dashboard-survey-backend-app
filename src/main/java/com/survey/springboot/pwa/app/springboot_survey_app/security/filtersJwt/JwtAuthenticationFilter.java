@@ -1,8 +1,9 @@
 package com.survey.springboot.pwa.app.springboot_survey_app.security.filtersJwt;
 
-import com.survey.springboot.pwa.app.springboot_survey_app.models.user.CrendentialEntity;
-import com.survey.springboot.pwa.app.springboot_survey_app.models.user.UserEntity;
 import tools.jackson.databind.ObjectMapper;
+
+import com.survey.springboot.pwa.app.springboot_survey_app.persistence.models.user.CrendentialEntity;
+import com.survey.springboot.pwa.app.springboot_survey_app.persistence.models.user.UserEntity;
 import com.survey.springboot.pwa.app.springboot_survey_app.security.jwt.JwtUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
