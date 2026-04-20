@@ -1,8 +1,9 @@
-package com.survey.springboot.pwa.app.springboot_survey_app.repository;
+package com.survey.springboot.pwa.app.springboot_survey_app.persistence.repository;
 
 
-import com.survey.springboot.pwa.app.springboot_survey_app.models.user.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.survey.springboot.pwa.app.springboot_survey_app.persistence.models.user.UserEntity;
 
 import java.util.Optional;
 

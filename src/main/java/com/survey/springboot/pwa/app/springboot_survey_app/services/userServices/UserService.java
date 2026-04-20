@@ -1,12 +1,13 @@
 package com.survey.springboot.pwa.app.springboot_survey_app.services.userServices;
 
 import com.survey.springboot.pwa.app.springboot_survey_app.dto.request.CreateUserRequest;
-import com.survey.springboot.pwa.app.springboot_survey_app.models.user.CrendentialEntity;
-import com.survey.springboot.pwa.app.springboot_survey_app.models.user.ERole;
-import com.survey.springboot.pwa.app.springboot_survey_app.models.user.RoleEntity;
-import com.survey.springboot.pwa.app.springboot_survey_app.models.user.UserEntity;
-import com.survey.springboot.pwa.app.springboot_survey_app.repository.RoleRepository;
-import com.survey.springboot.pwa.app.springboot_survey_app.repository.UserRepository;
+import com.survey.springboot.pwa.app.springboot_survey_app.persistence.models.user.CrendentialEntity;
+import com.survey.springboot.pwa.app.springboot_survey_app.persistence.models.user.ERole;
+import com.survey.springboot.pwa.app.springboot_survey_app.persistence.models.user.RoleEntity;
+import com.survey.springboot.pwa.app.springboot_survey_app.persistence.models.user.UserEntity;
+import com.survey.springboot.pwa.app.springboot_survey_app.persistence.repository.RoleRepository;
+import com.survey.springboot.pwa.app.springboot_survey_app.persistence.repository.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;

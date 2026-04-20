@@ -1,7 +1,7 @@
 package com.survey.springboot.pwa.app.springboot_survey_app.controllers;
 
 import com.survey.springboot.pwa.app.springboot_survey_app.dto.request.CreateUserRequest;
-import com.survey.springboot.pwa.app.springboot_survey_app.models.user.UserEntity;
+import com.survey.springboot.pwa.app.springboot_survey_app.persistence.models.user.UserEntity;
 import com.survey.springboot.pwa.app.springboot_survey_app.services.userServices.LoginService;
 import com.survey.springboot.pwa.app.springboot_survey_app.services.userServices.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

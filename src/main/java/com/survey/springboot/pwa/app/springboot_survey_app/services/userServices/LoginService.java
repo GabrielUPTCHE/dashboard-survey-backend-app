@@ -1,7 +1,8 @@
 package com.survey.springboot.pwa.app.springboot_survey_app.services.userServices;
 
-import com.survey.springboot.pwa.app.springboot_survey_app.models.user.UserEntity;
-import com.survey.springboot.pwa.app.springboot_survey_app.repository.UserRepository;
+import com.survey.springboot.pwa.app.springboot_survey_app.persistence.models.user.UserEntity;
+import com.survey.springboot.pwa.app.springboot_survey_app.persistence.repository.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
