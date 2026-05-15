@@ -19,6 +19,7 @@ import jakarta.servlet.http.Cookie;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,7 +55,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
-
+        Instant expirationInstant = java.time.Instant.now().plusSeconds(24 * 60 * 60);
         User user = (User) authResult.getPrincipal();
         String token = jwtUtils.generateAccesToken(user.getUsername());
         Cookie cookie = new Cookie("token", token);
@@ -66,6 +67,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         Map<String, Object> httpResponse = new HashMap<>();
         httpResponse.put("message", "Autenticación correcta");
         httpResponse.put("email", user.getUsername());
+        httpResponse.put("expiresAt", expirationInstant.toString());
         response.getWriter().write(new ObjectMapper().writeValueAsString(httpResponse));
         response.setStatus(200);
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
