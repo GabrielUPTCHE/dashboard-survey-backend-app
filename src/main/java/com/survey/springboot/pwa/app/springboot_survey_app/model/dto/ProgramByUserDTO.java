@@ -11,9 +11,9 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProgramByUserDTO {
-    private Long id;
-    private Long programId; // Referencia al Programa
-    private Long userId;    // Referencia al Usuario
+    private String id;
+    private String programId; // Referencia al Programa
+    private String userId;    // Referencia al Usuario
      private LocalDate startDate;
     private LocalDate endDate;
 }

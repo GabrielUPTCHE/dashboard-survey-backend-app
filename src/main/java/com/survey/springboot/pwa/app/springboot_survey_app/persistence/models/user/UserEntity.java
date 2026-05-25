@@ -2,10 +2,10 @@ package com.survey.springboot.pwa.app.springboot_survey_app.persistence.models.u
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
