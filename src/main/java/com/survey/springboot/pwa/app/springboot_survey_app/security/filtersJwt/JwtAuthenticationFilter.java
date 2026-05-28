@@ -43,7 +43,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
             Map<String, Object> jsonMap = mapper.readValue(body, Map.class);
 
-            email = (String) jsonMap.get("email");      // 👈 clave correcta
+            email = (String) jsonMap.get("email"); 
             password = (String) jsonMap.get("password");
             System.out.println("Email: " + email);
             System.out.println("Password: " + password);
