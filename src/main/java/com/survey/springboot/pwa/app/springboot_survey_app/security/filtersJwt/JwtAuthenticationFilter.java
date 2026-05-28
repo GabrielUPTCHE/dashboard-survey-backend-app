@@ -62,7 +62,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         cookie.setHttpOnly(true);
         cookie.setSecure(true);
         cookie.setPath("/");
-        cookie.setMaxAge(60 * 60);
+        cookie.setMaxAge(60 * 60 * 24);
         response.addCookie(cookie);
         Map<String, Object> httpResponse = new HashMap<>();
         httpResponse.put("message", "Autenticación correcta");

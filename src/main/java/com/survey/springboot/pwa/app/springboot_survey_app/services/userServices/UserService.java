@@ -15,6 +15,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
     @Autowired
@@ -60,11 +62,11 @@ public class UserService {
     CommandLineRunner initRoles(RoleRepository roleRepository) {
         return args -> {
             if (roleRepository.count() == 0) {
-                RoleEntity admin = RoleEntity.builder()
-                        .name(ERole.ADMIN)
-                        .build();
-
-                roleRepository.save(admin);
+                roleRepository.saveAll(List.of(
+                        RoleEntity.builder().name(ERole.ADMIN).build(),
+                        RoleEntity.builder().name(ERole.ASSISTANT).build(),
+                        RoleEntity.builder().name(ERole.SURVEYOR).build()
+                ));
             }
         };
     }
