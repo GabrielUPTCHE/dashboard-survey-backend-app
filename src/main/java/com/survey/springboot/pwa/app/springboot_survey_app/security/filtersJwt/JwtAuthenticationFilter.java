@@ -43,7 +43,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
             Map<String, Object> jsonMap = mapper.readValue(body, Map.class);
 
-            email = (String) jsonMap.get("email");      // 👈 clave correcta
+            email = (String) jsonMap.get("email"); 
             password = (String) jsonMap.get("password");
             System.out.println("Email: " + email);
             System.out.println("Password: " + password);
@@ -62,7 +62,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         cookie.setHttpOnly(true);
         cookie.setSecure(true);
         cookie.setPath("/");
-        cookie.setMaxAge(60 * 60);
+        cookie.setMaxAge(60 * 60 * 24);
         response.addCookie(cookie);
         Map<String, Object> httpResponse = new HashMap<>();
         httpResponse.put("message", "Autenticación correcta");
