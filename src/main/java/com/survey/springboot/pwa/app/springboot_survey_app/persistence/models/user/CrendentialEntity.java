@@ -28,4 +28,10 @@ public class CrendentialEntity {
     @Getter @Setter
     private boolean state = true;
 
+    @PrePersist
+    public void prePersist() {
+        if (!this.state) {
+            this.state = true;  // Establecer valor por defecto si no se ha asignado
+        }
+    }
 }
