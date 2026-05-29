@@ -25,6 +25,13 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
+    public List<UserEntity> getUsers(String role) {
+        if (role != null && !role.isBlank()) {
+            return userRepository.findByRole_Name(ERole.valueOf(role.toUpperCase()));
+        }
+        return userRepository.findAll();
+    }
+
     public UserEntity createUser(CreateUserRequest request) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         try {
