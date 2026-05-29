@@ -24,7 +24,7 @@ public class VisitRoute {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "programacion_turnos", nullable = false)
+    @JoinColumn(name = "programacion_turnos", nullable = true)
     private ShiftSchedule shiftSchedule;
 
     @ManyToOne(fetch = FetchType.LAZY)
