@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -13,7 +14,7 @@ import java.time.LocalTime;
 @AllArgsConstructor
 public class ShiftScheduleDTO {
     private Long id;
-    private Long userId; // Referencia al Usuario
+    private String userId;       // numberIdentification (PK de UserEntity, tipo String)
     private LocalDate date;
     private LocalTime startTime;
     private LocalTime endTime;
