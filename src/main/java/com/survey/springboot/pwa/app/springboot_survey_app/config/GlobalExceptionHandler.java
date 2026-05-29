@@ -30,7 +30,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiResponse<Void>> handleGlobalException(Exception ex) {
         ApiResponse<Void> response = ApiResponse.<Void>builder()
                 .success(false)
-                .message("Ocurrió un error interno en el servidor: " + ex.getMessage())
+                .message("Ocurrió un error interno en el servidor")
                 .data(null)
                 .build();
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);

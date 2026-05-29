@@ -18,6 +18,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import org.springframework.security.authentication.BadCredentialsException;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
@@ -44,13 +46,18 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                                 HttpServletResponse response) throws AuthenticationException {
         try {
             String body = new String(request.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
+            if (body.isBlank()) {
+                throw new BadCredentialsException("Credenciales requeridas");
+            }
             Map<String, Object> jsonMap = objectMapper.readValue(body, new TypeReference<Map<String, Object>>() {});
             String email = (String) jsonMap.get("email");
             String password = (String) jsonMap.get("password");
             return getAuthenticationManager().authenticate(
                     new UsernamePasswordAuthenticationToken(email, password));
+        } catch (AuthenticationException e) {
+            throw e;
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new BadCredentialsException("Credenciales inválidas", e);
         }
     }
 

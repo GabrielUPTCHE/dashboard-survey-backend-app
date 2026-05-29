@@ -17,6 +17,7 @@ public interface ShiftScheduleMapper {
     @Mapping(source = "userId", target = "user.numberIdentification")
     ShiftSchedule toEntity(ShiftScheduleDTO dto);
 
-    @Mapping(source = "userId", target = "user.numberIdentification")
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "user", ignore = true)
     void updateEntityFromDTO(ShiftScheduleDTO dto, @MappingTarget ShiftSchedule entity);
 }
