@@ -31,3 +31,26 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+# Ignorar la carpeta de configuración local y binarios de los providers (LO MÁS IMPORTANTE)
+**/.terraform/
+
+# Ignorar archivos de estado de Terraform (contienen datos sensibles e infraestructura actual)
+*.tfstate
+*.tfstate.*
+
+# Ignorar variables locales o secretos que tú definas
+*.tfvars
+*.tfvars.json
+
+# Ignorar configuraciones de CLI locales
+.terraformrc
+terraform.rc
+
+# Ignorar archivos de log
+*.log
+
+# Ignorar planes de ejecución guardados (pueden contener secretos en texto plano)
+*.tfplan
+*.tfplan.json
